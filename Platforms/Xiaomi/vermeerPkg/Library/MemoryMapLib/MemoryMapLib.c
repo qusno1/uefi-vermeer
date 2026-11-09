@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: BSD-3-Clause
-// Reservations: ianchb/sm8550-mainline 42f3b40c702abbc37c3a04c95af008cd283aeaf3.
-// UEFI allocations remain experimental QRD8550 layout candidates. See PORTING.md.
+// Reservations: ianchb/sm8550-mainline 42f3b40c702abbc37c3a04c95af008cd283aeaf3, plus this
+// board's three high DRAM banks measured in the stock vermeer device tree. The UEFI
+// allocation windows remain the reference platform's layout candidates until the stock
+// vermeer uefiplat.cfg is imported. See PORTING.md.
 #include <Library/MemoryMapLib.h>
 
 STATIC EFI_MEMORY_REGION_DESCRIPTOR gMemoryDescriptor[] = {

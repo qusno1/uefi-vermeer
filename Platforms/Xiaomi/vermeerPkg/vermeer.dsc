@@ -69,10 +69,10 @@
   #
   # Simple Frame Buffer
   #
-  # Active size from the stock N81A panel XML (HorizontalActive 1440,
-  # VerticalActive 3200). Without these the DEBUG frame-buffer log draws
-  # nothing after SEC clears "Display Reserved", leaving a black screen.
-  # ABL's scan-out stride is assumed equal to the width; unverified.
+  # Active size from the panel timing of this board: the stock boot argument names
+  # qcom,mdss_dsi_n11_42_02_0a_dsc_cmd, a 1440x3200 mode. Without these the DEBUG
+  # frame-buffer log draws nothing after SEC clears "Display Reserved", leaving a
+  # black screen. ABL's scan-out stride is assumed equal to the width; unverified.
   #
   gSiliciumPkgTokenSpaceGuid.PcdFrameBufferWidth|1440
   gSiliciumPkgTokenSpaceGuid.PcdFrameBufferHeight|3200

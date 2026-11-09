@@ -87,7 +87,8 @@
   INF Binaries/vermeer/QcomPkg/Drivers/FeatureEnablerDxe/FeatureEnablerDxe.inf
 
   # USE_CUSTOM_DISPLAY_DRIVER = 1: stock vermeer display chain (board DEPEX glue,
-  # unchanged vendor DisplayDxe with the N81A panel data from RAW.inc).
+  # unchanged vendor DisplayDxe with this board's own panel XMLs; RAW.inc refuses
+  # the build until those XMLs are imported).
   # Otherwise SimpleFbDxe publishes a GOP on the frame buffer the previous
   # stage left scanning out.
 !endif

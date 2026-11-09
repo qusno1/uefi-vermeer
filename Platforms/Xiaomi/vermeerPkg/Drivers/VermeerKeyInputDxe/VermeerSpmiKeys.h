@@ -1,5 +1,5 @@
 /** @file
-  Hardware keys of the Xiaomi Pad 6S Pro through the SPMI PMIC arbiter, as pure register-pointer code (host-testable).
+  Hardware keys of the Redmi K70 (vermeer) through the SPMI PMIC arbiter, as pure register-pointer code (host-testable).
 
   Facts, all from the board devicetree and mainline Linux (drivers/input/misc/pm8941-pwrkey.c, drivers/pinctrl/qcom/pinctrl-spmi-gpio.c):
     power key   PMIC SID 0, PON peripheral PID 0x13 (reg 0x1300), PON_RT_STS at +0x10, PON_GEN3_KPDPWR_N_SET = bit 7, set = pressed

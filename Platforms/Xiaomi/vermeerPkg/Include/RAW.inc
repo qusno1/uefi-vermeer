@@ -9,16 +9,11 @@
   }
 !endif
 
+// The stock panel data of this board is not imported yet. The K70 boots with
+// qcom,mdss_dsi_n11_42_02_0a_dsc_cmd, so the reference platform's N81A XMLs do
+// not apply and are not listed here: USE_CUSTOM_DISPLAY_DRIVER = 1 must fail
+// until Binaries/vermeer/RawFiles carries the n11 XMLs with their original FFS
+// GUIDs and UI names taken from this board's own UEFI image.
 !if $(USE_CUSTOM_DISPLAY_DRIVER) == 1
-  # Stock vermeer panel data, original FFS GUIDs and UI names, from the
-  # firmware import of this board's build.
-  FILE FREEFORM = 15A84758-9EE1-4543-9C82-F430A70F0813 {
-    SECTION UI = "Panel_N81A_36_02_0a_p0_duldsi_dsc_vid.xml"
-    SECTION RAW = Binaries/vermeer/RawFiles/Panel_N81A_36_02_0a_p0_duldsi_dsc_vid.xml
-  }
-  FILE FREEFORM = 43013DAA-0CE4-4D82-99EE-17F772A38401 {
-    SECTION UI = "Panel_N81A_36_02_0a_duldsi_dsc_vid.xml"
-    SECTION RAW = Binaries/vermeer/RawFiles/Panel_N81A_36_02_0a_duldsi_dsc_vid.xml
-  }
+  !error vermeer panel XMLs are not imported: extract them from the stock UEFI image first
 !endif
-
