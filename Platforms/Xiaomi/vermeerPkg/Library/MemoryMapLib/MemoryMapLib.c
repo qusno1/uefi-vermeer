@@ -57,12 +57,15 @@ STATIC EFI_MEMORY_REGION_DESCRIPTOR gMemoryDescriptor[] = {
   // 0x80000000..0x100000000, which the SMEM RAM partition table lists as SDRAM. UEFI accepted these on hardware.
   {"DRAM gap 0xC7CC0000", 0xC7CC0000, 0x05040000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv, WRITE_BACK_XN},
   {"DRAM gap 0xCCF80000", 0xCCF80000, 0x0B080000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv, WRITE_BACK_XN},
-  // The stock vermeer device tree puts the top low DRAM extent at 0xE7CB0000 + 0x18350000, ending
-  // exactly at 0x100000000. This entry used to claim 0xE671D000 + 0x190E3000, which starts 21.6 MiB
-  // below the real extent (inside tz-tags/hwfence reservations) and stops 8 MiB short at 0xFF800000.
-  // The early kernel walk touched 0xE8004000, a synchronous external abort: with the old numbers the
-  // map described DRAM where there is none.
-  {"DRAM gap 0xE7CB0000", 0xE7CB0000, 0x18350000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv, WRITE_BACK_XN},
+  // The stock vermeer device tree puts the top low DRAM extent at 0xE7CB0000 + 0x18350000, but that
+  // runs to 0x100000000 and would overlap llcc-lpi-region@FF800000, which the map already reserves;
+  // the firmware refuses a map with overlapping regions. The extent is therefore truncated at
+  // 0xFF800000: 0xE7CB0000 + 0x17B50000.
+  //
+  // This entry used to start at 0xE671D000, 21.6 MiB below the real DRAM, inside the tz-tags and
+  // hwfence-shbuf reservations. The early kernel walk took a synchronous external abort at
+  // 0xE8004000, an address the map described as DRAM but which is not.
+  {"DRAM gap 0xE7CB0000", 0xE7CB0000, 0x17B50000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv, WRITE_BACK_XN},
   // Second DRAM bank from the stock vermeer device tree (16 GiB part): usable extents 0x880000000 +
   // 0x38700000, 0x8B8900000 + 0x1E00000, 0x8C0000000 + 0x14000000 (5 GiB) and 0xA00000000 +
   // 0x200000000 (8 GiB). The reference SM8550 board aborted clearing memory above 0x8BB300000, so the
